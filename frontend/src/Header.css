@@ -1,0 +1,27 @@
+@font-face{
+    font-family: "Ghostz";
+    src: url("fonts/Ghostz.ttf");
+
+}
+
+.header h1{
+    font-family: "Ghostz";
+    color: #FFF8D9;
+    -webkit-text-stroke: 1px black;
+    font-size: 5rem;
+    position:relative;
+    bottom:60px;
+}
+
+
+@media (min-width:641px){ 
+    .header h1{
+        font-family: "Ghostz";
+        color: #FFF8D9;
+        -webkit-text-stroke: 1px black;
+        font-size: 6rem;
+        position:relative;
+        bottom:50px;
+      
+    }
+}

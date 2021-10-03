@@ -1,0 +1,46 @@
+.loading-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.spiral{
+    width:35%;
+    margin-top: 5%;
+    
+}
+
+h5{
+    position:absolute;
+    top:5px;
+    left:10px;
+    color: rgb(58, 88, 58);
+}
+
+h5 input{
+    background: none;
+    border:none;
+    width:250px;
+    outline:none;
+}
+
+
+
+.text{
+    margin-top: 50px;
+    color: #FFF8D9;
+}
+
+@media(max-width:1000px){
+    .spiral{
+        margin-top:20%;
+    }
+}
+
+@media(max-width:500px){
+    .spiral{
+        margin-top:45%;
+    }
+}

@@ -1,0 +1,577 @@
+@font-face{
+    font-family: "Ghostz";
+    src: url("fonts/Ghostz.ttf");
+}
+
+body{
+    background-color:#CEE5D0; 
+    margin: 0;
+}
+
+.home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    
+}
+
+.home h5{
+    position:absolute;
+    left:10px;
+    color: rgb(58, 88, 58);
+}
+
+form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home input{
+    border-radius:20px;
+    border:none;
+    outline:none;
+    width:80%;
+    text-align: center;
+    margin-top:10px;
+    margin-bottom: 20px;
+    
+}
+
+.home p{
+    font-size:1.5em;
+    color:gray;
+}
+
+.playButton{
+    background-color: rgb(58, 88, 58);
+    font-size: 1.3em;
+    color: #FFF8D9;
+    border-radius:20px;
+    border: none;
+    outline: none;
+    width:40%;
+    height: 50px;
+    text-align: center;
+    margin-top:10px;
+}
+
+.playButton:active{
+    background-color: grey;
+}
+
+
+.flyingghost1{
+    position:absolute;
+    width:50px;
+    transform: rotate(45deg);
+    bottom:350px;
+    left:-10px;
+    z-index: -10;
+
+}
+
+.flyingghost1a{
+    position:absolute;
+    width:50px;
+    transform: rotate(45deg);
+    bottom:200px;
+    left:-160px;
+    z-index: -10;
+
+}
+
+.flyingghost2{
+    position:absolute;
+    width:50px;
+    transform: rotate(-135deg);
+    bottom:290px;
+    left:-10px;
+    z-index: -10;
+
+}
+
+.flyingghost2a{
+    position:absolute;
+    width:50px;
+    transform: rotate(-135deg);
+    bottom:190px;
+    left:-110px;
+    z-index: -10;
+
+}
+
+.flyingghost2b{
+    position:absolute;
+    width:50px;
+    transform: rotate(-135deg);
+    bottom:90px;
+    left:-210px;
+    z-index: -10;
+
+}
+
+.flyingghost3{
+    position:absolute;
+    width:50px;
+    transform: rotate(45deg);
+    bottom:230px;
+    left:-10px;
+    z-index: -10;
+
+}
+
+.flyingghost3a{
+    position:absolute;
+    width:50px;
+    transform: rotate(45deg);
+    bottom:130px;
+    left:-110px;
+    z-index: -10;
+
+}
+
+.flyingghost3b{
+    position:absolute;
+    width:50px;
+    transform: rotate(45deg);
+    bottom:30px;
+    left:-210px;
+    z-index: -10;
+
+}
+
+.flyingghost4{
+    position:absolute;
+    width:50px;
+    transform: rotate(-135deg);
+    bottom:170px;
+    left:-10px;
+    z-index: -10;
+
+}
+
+.flyingghost4a{
+    position:absolute;
+    width:50px;
+    transform: rotate(-135deg);
+    bottom:70px;
+    left:-110px;
+    z-index: -10;
+
+}
+
+.flyingghost4b{
+    position:absolute;
+    width:50px;
+    transform: rotate(-135deg);
+    bottom:-30px;
+    left:-210px;
+    z-index: -10;
+
+}
+
+.flyingghost5{
+    position:absolute;
+    width:50px;
+    transform: rotate(45deg);
+    bottom:110px;
+    left:-10px;
+    z-index: -10;
+
+}
+
+.flyingghost5a{
+    position:absolute;
+    width:50px;
+    transform: rotate(45deg);
+    bottom:10px;
+    left:-110px;
+    z-index: -10;
+
+}
+
+.flyingghost5b{
+    position:absolute;
+    width:50px;
+    transform: rotate(45deg);
+    bottom:-90px;
+    left:-210px;
+    z-index: -10;
+
+}
+
+.flyingghost6{
+    position:absolute;
+    width:50px;
+    transform: rotate(-135deg);
+    bottom:50px;
+    left:-10px;
+    z-index: -10;
+
+}
+
+.flyingghost7{
+    position:absolute;
+    width:50px;
+    transform: rotate(45deg);
+    bottom:-10px;
+    left:-10px;
+    z-index: -10;
+
+}
+
+.big-input{
+    font-size:2.5em;
+}
+
+.overlay{
+    position: fixed;
+    top:0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .5);
+    opacity:0;
+    transition: 200ms ease-in-out;
+    /* Click events can't be captured
+    when overlay not active. You need this
+    to click buttons when overlay not active*/
+    pointer-events: none;
+
+}
+
+.overlay.active{
+    opacity: 1;
+    /* Click events can be captured
+    when overlay active. You need this shit 
+    to click buttons when overlay not active* */
+    pointer-events: all;
+}
+
+.create-game-modal{
+    
+    background-color:#57837B;
+    width:80%;
+    text-align: center;
+    position: fixed;
+    /* Centering */
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%)scale(0);
+    transition: 200ms ease-in-out;
+    z-index:10;
+    padding:20px;
+    border-radius: 10px;
+}
+
+.create-game-modal.active{
+    transform: translate(-50%,-50%)scale(1);
+
+}
+
+.create-game-modal-header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.create-game-modal-header img{
+    width:30px;
+    height:30px;
+}
+
+.create-game-modal-header h3{
+    font-family: "Ghostz";
+    color: #FFF8D9;
+    -webkit-text-stroke: 1px black;
+    font-size:2rem;
+}
+
+.create-game-modal-buttons{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.create-game-modal-buttons p{
+    color: #FFF8D9;
+    font-size: 12px;
+}
+
+.create-game-modal-buttons button{
+    background-color: #FFF8D9;
+    font-family: "Ghostz";
+    margin-bottom:15px;
+    border-radius:20px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    height: 40px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.create-game-modal-buttons button:active{
+    background-color: grey;
+}
+
+.create-game-modal-buttons div{
+    display:flex;
+    align-content: center;
+}
+
+.create-game-modal-buttons div h3{
+    color:#FFF8D9;
+    margin-left:10px;
+    position:relative;
+    bottom:8px;
+}
+
+
+.rules-modal{
+    background-color:#57837B;
+    width:80%;
+    text-align: center;
+    position: fixed;
+    /* Centering */
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%)scale(0);
+    transition: 200ms ease-in-out;
+    z-index:10;
+    padding:20px;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column;
+
+}
+
+.rules-modal.active{
+    transform: translate(-50%,-50%)scale(1);
+}
+
+.rules-modal-header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:0;
+    padding:0;
+}
+
+.rules-modal-header img{
+    width:20px;
+    height:20px;
+}
+
+.rules-modal h3{
+    font-family: "Ghostz";
+    color: #FFF8D9;
+    -webkit-text-stroke: 1px black;
+    font-size:2rem;
+}
+
+.rules-info{
+    display:flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: left;
+    margin:0;
+    padding:0;
+    
+}
+
+.rules-modal .rules-info p{
+    font-size:16px;
+    color: #FFF8D9;
+    margin:3px;
+}
+
+.inactive{
+    visibility: hidden;
+}
+
+.translucent{
+    opacity:0;
+}
+
+
+.hide{
+    display:none;
+}
+
+
+
+@media (min-width:641px)  { 
+    .flyingghost1{
+        position:absolute;
+        width:50px;
+        transform: rotate(45deg);
+        bottom:-100px;
+        left:-10px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost1a{
+        position:absolute;
+        width:50px;
+        transform: rotate(45deg);
+        bottom:-200px;
+        left:-160px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost2{
+        position:absolute;
+        width:50px;
+        transform: rotate(-135deg);
+        bottom:-290px;
+        left:-10px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost2a{
+        position:absolute;
+        width:50px;
+        transform: rotate(-135deg);
+        bottom:-190px;
+        left:-110px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost2b{
+        position:absolute;
+        width:50px;
+        transform: rotate(-135deg);
+        bottom:-90px;
+        left:-210px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost3{
+        position:absolute;
+        width:50px;
+        transform: rotate(45deg);
+        bottom:-230px;
+        left:-10px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost3a{
+        position:absolute;
+        width:50px;
+        transform: rotate(45deg);
+        bottom:-130px;
+        left:-110px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost3b{
+        position:absolute;
+        width:50px;
+        transform: rotate(45deg);
+        bottom:-130px;
+        left:-210px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost4{
+        position:absolute;
+        width:50px;
+        transform: rotate(-135deg);
+        bottom:-170px;
+        left:-10px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost4a{
+        position:absolute;
+        width:50px;
+        transform: rotate(-135deg);
+        bottom:-70px;
+        left:-110px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost4b{
+        position:absolute;
+        width:50px;
+        transform: rotate(-135deg);
+        bottom:-80px;
+        left:-210px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost5{
+        position:absolute;
+        width:50px;
+        transform: rotate(45deg);
+        bottom:-110px;
+        left:-10px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost5a{
+        position:absolute;
+        width:50px;
+        transform: rotate(45deg);
+        bottom:-70px;
+        left:-110px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost5b{
+        position:absolute;
+        width:50px;
+        transform: rotate(45deg);
+        bottom:-90px;
+        left:-210px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost6{
+        position:absolute;
+        width:50px;
+        transform: rotate(-135deg);
+        bottom:-60px;
+        left:-10px;
+        z-index: -10;
+    
+    }
+    
+    .flyingghost7{
+        position:absolute;
+        width:50px;
+        transform: rotate(45deg);
+        bottom:-70px;
+        left:-10px;
+        z-index: -10;
+    
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+    .rules-modal {
+      zoom: .8;
+    }
+
+  }
