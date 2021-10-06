@@ -10,12 +10,6 @@ import {GameContext} from "./App";
 
 
 
-//Add memoization to make shit faster
-//Set a time in which the player needs to make a move
-//What if several people go to the server at the same time?
-
-
-
 
 function Game({history}) {
   const socket=io('https://ghostwordgameapp.herokuapp.com/');
@@ -36,7 +30,7 @@ function Game({history}) {
   //Keeps state of opponent's score
   const [opponentScore,setOpponentScore]=useState("");
 
-  //Keeps track of if it is your turn
+  //Keeps track of your turn
   const [yourTurn,setYourTurn]=useState();
 
   //Keeps track of what room you are in
@@ -44,10 +38,8 @@ function Game({history}) {
 
   const [result, setResult]=useState("");
 
-  //Since yourTurn is needed for the API call 
-  //which is asynchronous and may be slow, we will use 
-  //pressable to make sure the user can only press 
-  //a valid key once when it is their turn
+  //we will use pressable to make sure the user can only press 
+  //a valid key once, when it is their turn
   const [pressable, setPressable]=useState();
 
   const [requested,setRequested]=useState(false);
@@ -55,16 +47,12 @@ function Game({history}) {
   const [countDown, setCountDown]=useState(0);
 
 
-  //ref to add a keydown event listener
-  // const mainDiv=useRef();
-
-
   const playHead=useRef();
 
   const secondPlayHead=useRef();
 
 
-  //The following refs are for the ghost animations
+  //refs for ghost animations
   //your ghosts
   const uG1=useRef();
   const uG2=useRef();
@@ -133,11 +121,6 @@ function Game({history}) {
         setNumberOfPlayers(amount);
       })
     })
-
-    
-    
-
-    //We need a way to play the loading animation if only 1 player in the room
     
 
     socket.on("receive-player-amount",amount=>{
@@ -146,15 +129,8 @@ function Game({history}) {
     })
 
 
-    //Send your username to opponent
-
-    //Why is the username not sending?!?!?!??!
-
-
     socket.on("opponent-name",(oppName,id)=>{
-      console.log("opp name: "+oppName);
-      console.log(socket.id);
-      console.log(id);
+      
       if(id!==gameInfo.playerID){
         if(oppName.length===0||oppName===/\s*/){
           setOpponentName('Opponent');
@@ -227,19 +203,7 @@ function Game({history}) {
       oG3.current.classList.remove('inactive');
       oG4.current.classList.remove('inactive');
       oG5.current.classList.remove('inactive');
-    })
-
-
-    
-
-    
-        
-
-    
-    
-
-    
-    
+    })  
      
         
   },[])
@@ -252,7 +216,6 @@ function Game({history}) {
       if(res.data.status && word.length>3){
       //if so, then the player to put the letter down, loses the round
       //Add a letter to the losing player
-        // gsap.to(wordRef.current,{color:'#FFF8D9', duration:1})
         console.log(yourTurn);
         if(yourTurn){
           console.log("in losing");
@@ -268,6 +231,7 @@ function Game({history}) {
         document.querySelector(".popup p").innerText=res.data.definition;
 
         gsap.fromTo(definitionPopUp.current,{opacity:0},{opacity:0.7, duration:2, ease:"none"});
+        
         setTimeout(function(){
           gsap.fromTo(definitionPopUp.current,{opacity:0.7},{opacity:0, duration:2, ease:"none"});
         },7000)
@@ -312,18 +276,11 @@ function Game({history}) {
 
   async function keypress(e){
 
-    
-    console.log("keypress-yourturn:"+yourTurn);
-    console.log("keypress-pressable:"+pressable);
-
-    //If the key pressed is a letter, then that letter 
-    //can be appended to the string being created by the users.
    
     if(pressable && yourTurn){
       console.log(room);
       socket.emit('userinput', e.target.innerText, room);
 
-    //If not, the current player will be notified to enter a letter.
     }else{
       console.log("you must enter a letter or wait your turn.");
     }   
@@ -333,19 +290,17 @@ function Game({history}) {
 
 
   useEffect(()=>{
-    console.log("word useeffect word:"+word);
     if(word.length>0){
 
       //Resizing logic so word doesn't get bigger than screen
       //Gets position of right edge of word in relation to window
       let rect=gameString.current.getBoundingClientRect();
-      console.log(rect.right);
 
-      //Gets distance of word from wdge of window
+      //Gets distance of word from edge of window
       let distanceFromWindow=(window.innerWidth-rect.right);
       console.log(distanceFromWindow);
 
-      //If the distance is less than 36 pixels, then resize the word smaller
+      //If the distance is less than 36 pixels, then resize the word
       if(distanceFromWindow<36){
         let gameStringFontSize=parseFloat(window.getComputedStyle(gameString.current, null).getPropertyValue('font-size'));
         console.log("font size: "+gameStringFontSize);
@@ -447,7 +402,6 @@ function Game({history}) {
       playAgain.current.disabled=true;
       socket.emit("request-rematch",room, gameInfo.playerID);
       //Start the timer for both
-      //Maybe from callback for sending party
       
     } 
   }
@@ -567,7 +521,6 @@ function Game({history}) {
         </div>        
         
         <button onClick={()=>{
-          //Find a way to leave the room
           gameInfo.clearGameID();
           history.push('/');
         }}>Back to Login</button>

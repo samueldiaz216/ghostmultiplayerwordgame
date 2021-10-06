@@ -18,4 +18,4 @@ function LoadingPage(props) {
     )
 }
 
-export default LoadingPage
+export default LoadingPage;
